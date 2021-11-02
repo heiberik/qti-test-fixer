@@ -1,0 +1,17 @@
+{
+    "name": "notranslate-nodejs",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "type": "module",
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "extract-zip": "^2.0.1",
+        "yauzl": "^2.10.0",
+        "zip-dir": "^2.0.0"
+    }
+}
