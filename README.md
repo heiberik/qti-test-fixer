@@ -1,6 +1,6 @@
 # QTI TEST FIXER
 
-QTI Test fixer is a nodeJS application for mass editing Items in a Test. 
+QTI Test fixer is a nodeJS application for mass editing QTI Items in a QTI Test. 
 
 ## Installation
 
