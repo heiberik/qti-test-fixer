@@ -2,6 +2,7 @@ import fs from "fs"
 import path from "path"
 import extract from 'extract-zip'
 import zipdir from 'zip-dir'
+import config from 'config.js'
 
 
 const zipFiles = (name) => {
@@ -14,27 +15,18 @@ const zipFiles = (name) => {
 
 const fixFiles = (name) => {
 
-    fs.readdir("./" + name + "/items/", function(err, filenames) {
-        if (err) {
-            onError(err);
-            return;
-        }
-        filenames.forEach(function(filename) {
+    let itemFolders = fs.readdirSync("./" + name + "/items/")
 
-            fs.readFile("./" + name + "/items/" + filename + "/qti.xml", 'utf-8', function(err, content) {
-                if (err) {
-                    onError(err);
-                    return;
-                }
+    itemFolders.forEach(function(filename) {
 
-                var result = content.replace(/<div class="grid-row">/g, '<div class="grid-row" translate="no">');
+        let content = fs.readFileSync("./" + name + "/items/" + filename + "/qti.xml", 'utf-8')
+        let regex = new RegExp(`/${config.replace}/g`);
+        let result = content.replace(regex, config.replaceWith)
 
-                fs.writeFile("./" + name + "/items/" + filename + "/qti.xml", result, 'utf8', function(err) {
-                    if (err) return console.log(err);
-                });
-            });
-        });
+        fs.writeFileSync("./" + name + "/items/" + filename + "/qti.xml", result, 'utf8')
     });
+
+    zipFiles(name)
 }
 
 
@@ -42,7 +34,6 @@ const fixFiles = (name) => {
 const fixTests = () => {
 
     const paths = getAllTestPaths();
-
 
     paths.forEach(async(p, index) => {
 
@@ -59,10 +50,6 @@ const fixTests = () => {
         } catch (err) {
             console.log("ERROR D:");
         }
-
-        setTimeout(() => {
-            zipFiles(name)
-        }, 5000)
     })
 }
 
