@@ -4,7 +4,7 @@ QTI Test fixer is a nodeJS application for mass editing QTI Items in a QTI Test.
 
 ## Installation
 
-* In your terminal in your decired folder:
+* In your terminal in your desired folder:
 * $ git clone https://github.com/heiberik/qti-test-fixer
 * $ cd ./qti-test-fixer
 * $ npm install
@@ -12,7 +12,7 @@ QTI Test fixer is a nodeJS application for mass editing QTI Items in a QTI Test.
 
 ## Usage 
 
-Export your tests and put them into the folder "tests". This folder can container multiple tests. 
+Export your tests and put them into the folder "tests". This folder can contain multiple tests. 
 
 In the "config.js" file: modify the two variables "replace" and "replaceWith" according to your needs. 
 
