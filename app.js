@@ -2,7 +2,7 @@ import fs from "fs"
 import path from "path"
 import extract from 'extract-zip'
 import zipdir from 'zip-dir'
-import config from 'config.js'
+import config from './config.js'
 
 
 const zipFiles = (name) => {
@@ -20,7 +20,7 @@ const fixFiles = (name) => {
     itemFolders.forEach(function(filename) {
 
         let content = fs.readFileSync("./" + name + "/items/" + filename + "/qti.xml", 'utf-8')
-        let regex = new RegExp(`/${config.replace}/g`);
+        let regex = new RegExp(config.replace, 'g');
         let result = content.replace(regex, config.replaceWith)
 
         fs.writeFileSync("./" + name + "/items/" + filename + "/qti.xml", result, 'utf8')
@@ -35,9 +35,13 @@ const fixTests = () => {
 
     const paths = getAllTestPaths();
 
+    if (!fs.existsSync('./results')) {
+        fs.mkdirSync("./results")
+    }
+
     paths.forEach(async(p, index) => {
 
-        const name = p.substring(0, p.length - 4) + "_" + (index + 1)
+        const name = p.substring(0, p.length - 4)
 
         fs.mkdirSync("./" + name);
 
