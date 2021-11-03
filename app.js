@@ -8,7 +8,7 @@ import config from './config.js'
 const zipFiles = (name) => {
 
     zipdir(path.resolve("./" + name), { saveTo: './results/' + name + '.zip' }, function(err, buffer) {
-        fs.rmdirSync("./" + name, { recursive: true })
+        fs.rmSync("./" + name, { recursive: true })
     })
 }
 
